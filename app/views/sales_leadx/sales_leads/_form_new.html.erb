@@ -1,0 +1,20 @@
+<%= simple_form_for(@sales_lead) do |f| %>    
+ 
+  <%= f.input :lead_date, :label => t("Date:"), :as => :string%>
+  <%= f.input :customer_name, :label => t('Customer Name:'), :readonly => true, :required => false, :input_html => {:value => @customer.name} %>
+  <%= f.input :customer_id, :as => :hidden, :input_html => {:value => @customer.id} %>  
+  <%= f.input :subject, :label => t('Subject'), :placeholder => '一句话说明线索是什么' %>
+  <%= f.input :lead_info, :label => t('Lead Info:'), :input_html => {:rows => 4} %>
+  <%= f.input :contact_instruction, :label => t('Contact Instruction:'), :hint => '联系人及电话等联系方式', :input_html => { :rows => 6} %>  
+  <%= f.input :lead_source_id, :label => t('Lead Source：'), :collection => lead_sources() %>     
+  <%= f.input :lead_eval, :label => t('Lead Eval:'), :input_html => { :rows => 4} %> 
+  <%= f.input :lead_accuracy_scale, :label => t('Accuracy Scale:'), :collection => 1..10, :include_blank => true %>
+  <%= f.input :lead_quality_scale, :label => t('Quality Scale:'), :collection => 1..10, :include_blank => true %>
+  <%= f.input :provider_id, :label => t('Provider:'), :collection => Authentify::UsersHelper.return_users('create', params[:controller]),
+                                                   :label_method => :name, :value_method => :id  %>        
+     
+  
+  <%= f.button :submit, t('Save'), :class => BUTTONS_CLS['action'] %>  
+<% end %>  
+
+
