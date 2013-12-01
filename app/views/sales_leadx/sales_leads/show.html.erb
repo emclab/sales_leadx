@@ -55,14 +55,14 @@
 <% end %>
 <p>
   <b><%=t('Lead Status:') %></b>
-  <%= @sales_lead.lead_status.name if @sales_lead.lead_status_id.present? %>
+  <%= @sales_lead.lead_status.name %>
 </p>
 <p>
   <b><%=t('Lead Source:') %></b>
-  <%= @sales_lead.lead_source.name if @sales_lead.lead_source_id.present? %>
+  <%= @sales_lead.lead_source.name %>
 </p>
 <p>
-  <b>输入/更改:</b>
+  <b><%=t('Last Updated By')%>:</b>
   <%= @sales_lead.last_updated_by.name %>
 </p>
 <p>

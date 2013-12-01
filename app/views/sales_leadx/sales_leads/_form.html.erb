@@ -4,34 +4,36 @@
 <% else %>
 <%= simple_form_for(@sales_lead) do |f| %>    
  
-  <%= f.input :lead_date, :label => t("Date:"), :as => :string%>
-  <%= f.input :customer_name, :label => t('Customer Name:'), :readonly => true, :required => false, :input_html => {:value => @customer.name} %>  
+  <%= f.input :lead_date, :label => t("Date"), :as => :string%>
+  <%= f.input :customer_name, :label => t('Customer Name'), :readonly => true, :required => false, :input_html => {:value => @customer.name} %>  
   <%= f.input :subject, :label => t('Subject'), :hint => '一句话说明线索是什么', :readonly => readonly?(@sales_lead, 'subject') %>
-  <%= f.input :lead_info, :label => t('Lead Info:'), :input_html => {:rows => 4}, :readonly => readonly?(@sales_lead, 'lead_info') %>
-  <%= f.input :contact_instruction, :label => t('Contact Instruction:'), :hint => '联系人及电话等联系方式', :input_html => { :rows => 6}, :readonly => readonly?(@sales_lead, 'contact_instruction') %>
+  <%= f.input :lead_info, :label => t('Lead Info'), :input_html => {:rows => 4}, :readonly => readonly?(@sales_lead, 'lead_info') %>
+  <%= f.input :contact_instruction, :label => t('Contact Instruction'), :hint => '联系人及电话等联系方式', :input_html => { :rows => 6}, :readonly => readonly?(@sales_lead, 'contact_instruction') %>
   <% if readonly?(@sales_lead, 'lead_source_id') %>
-    <%= f.input :lead_source_name, :label => t('Lead Source：'), :input_html => {:value => @sales_lead.lead_source.name}, :readonly => true %>  
+    <%= f.input :lead_source_name, :label => t('Lead Source'), :input_html => {:value => @sales_lead.lead_source.name}, :readonly => true %>  
   <% else %>
-    <%= f.input :lead_source_id, :label => t('Lead Source：'), :collection => lead_sources() %> 
-  <% end %>    
-  <%= f.input :lead_eval, :label => t('LeadEval:'), :input_html => { :rows => 4}, :readonly => readonly?(@sales_lead, 'lead_eval')  %>
+    <%= f.input :lead_source_id, :label => t('Lead Source'), :collection => lead_sources() %> 
+  <% end %> 
+  <%= f.input :lead_status_id, :label => t('Lead Status'), :collection => lead_status() unless readonly?(@sales_lead, 'lead_status_id') %>    
+  <%= f.input :lead_status_name, :label => t('Lead Status'), :input_html => {:value => @sales_lead.lead_status.name} if readonly?(@sales_lead, 'lead_status_id') %>       
+  <%= f.input :lead_eval, :label => t('Lead Eval'), :input_html => { :rows => 4}, :readonly => readonly?(@sales_lead, 'lead_eval')  %>
   <% if readonly?(@sales_lead, 'sale_success') %>
-    <%= f.input :sale_success_value, :label => t('Sale Success:'), :readonly => true, :input_html => {:value => @sales_lead.sale_success ? '是' : '否' } %>
+    <%= f.input :sale_success_value, :label => t('Sale Success'), :readonly => true, :input_html => {:value => @sales_lead.sale_success ? t('Yes') : t('No') } %>
   <% else %>
-    <%= f.input :sale_success, :label => t('Sale Success:'), :collection => [['Yes', true], ['No', false]], :include_blank => true %>
+    <%= f.input :sale_success, :label => t('Sale Success'), :collection => [[t('Yes'), true], [t('No'), false]], :include_blank => true %>
   <% end %>
   <div id="sales_lead_order_total">
-  <%= f.input :initial_order_total, :label => '成单金额￥：', :hint => '初次订单金额', :readonly => readonly?(@sales_lead, 'initial_order_total') %> 
+  <%= f.input :initial_order_total, :label => t('Init. Order Amount($)'), :hint => '初次订单金额', :readonly => readonly?(@sales_lead, 'initial_order_total') %> 
   </div>
   <% if readonly?(@sales_lead, 'close_lead') %>
-    <%= f.input :close_lead_value, :label => t('Close Lead:'), :readonly => true, :input_html => {:value => @sales_lead.close_lead ? '是' : '否' } %>
+    <%= f.input :close_lead_value, :label => t('Close Lead'), :readonly => true, :input_html => {:value => @sales_lead.close_lead ? t('Yes') : t('No') } %>
   <% else %>
-    <%= f.input :close_lead, :label => t('Close Lead:'), :collection => [['Yes', true], ['No', false]], :include_blank => true %>
+    <%= f.input :close_lead, :label => t('Close Lead'), :collection => [['Yes', true], ['No', false]], :include_blank => true %>
   <% end %>
-  <%= f.input :lead_accuracy_scale, :label => t('Accuracy Scale:'), :collection => 1..10, :include_blank => true, :readonly => readonly?(@sales_lead, 'lead_accuracy_scale') %>
-  <%= f.input :lead_quality_scale, :label => t('Quality Scale:'), :collection => 1..10, :include_blank => true, :readonly => readonly?(@sales_lead, 'lead_quality_scale') %>
+  <%= f.input :lead_accuracy_scale, :label => t('Accuracy Scale'), :collection => 1..10, :include_blank => true, :readonly => readonly?(@sales_lead, 'lead_accuracy_scale') %>
+  <%= f.input :lead_quality_scale, :label => t('Quality Scale'), :collection => 1..10, :include_blank => true, :readonly => readonly?(@sales_lead, 'lead_quality_scale') %>
   <%= f.input :provider_name_autocomplete, :input_html => { data: {autocomplete_source: SUBURI + authentify.autocomplete_users_path}}, :placeholder => "输入关键字", 
-              :label => "线索人：", :required => true  %>        
+              :label => t('Lead Provider'), :required => true  %>        
   
   <%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0", :class => BUTTONS_CLS['action'] %> 
   <%= f.button :submit, t('Save'), :class => BUTTONS_CLS['action'] %>  

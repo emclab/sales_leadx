@@ -5,7 +5,7 @@ module SalesLeadx
     before_filter :require_employee
     before_filter :load_customer
     
-    helper_method :lead_sources
+    helper_method :lead_sources, :lead_status
     
    def index
       @title= "销售线索"
@@ -70,6 +70,10 @@ module SalesLeadx
         
     def lead_sources
       Commonx::MiscDefinition.where(:for_which => 'sales_lead_source').where(:active => true).order("ranking_index")
+    end
+    
+    def lead_status
+      Commonx::MiscDefinition.where(:for_which => 'sales_lead_status').where(:active => true).order('ranking_index')
     end
     
     def load_customer
