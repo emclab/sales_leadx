@@ -27,7 +27,7 @@ module SalesLeadx
     
     validates :lead_info, :subject, :lead_date, :presence => true
     validates :customer_id, :provider_id, :lead_source_id, :lead_status_id, :presence => true, :numericality => {:greater_than => 0}
-    validates :lead_info, :uniqueness => {:scope => :customer_id, :case_sensitive => false, :message => 'Duplicate Lead Info!'}
+    validates :lead_info, :uniqueness => {:scope => :customer_id, :case_sensitive => false, :message => t('Duplicate Lead Info!')}
     
     def customer_name_autocomplete
       self.customer.try(:name)
