@@ -4,18 +4,19 @@
 <% else %>
 <%= simple_form_for @sales_lead do |f| %>    
  
-  <%= f.input :lead_date, :label => t("Date:"), :as => :string%>
+  <%= f.input :lead_date, :label => t("Date"), :as => :string%>
   <%= f.input :customer_name_autocomplete, :input_html => { data: {autocomplete_source: SUBURI + kustomerx.autocomplete_customers_path}}, :placeholder => "输入关键字", 
                                            :label => "客户 ：", :required => true %>  
-  <%= f.input :subject, :label => t('Subject:'), :placeholder => '一句话说明' %>
-  <%= f.input :lead_info, :label => t('Lead Info:'), :input_html => {:rows => 6} %>
-  <%= f.input :contact_instruction, :label => t('Contact Instruction:'), :hint => '联系人及电话等联系方式', :input_html => { :rows => 4} %>  
-  <%= f.input :lead_source_id, :label => t('Lead Source：'), :collection => lead_sources() %>     
+  <%= f.input :subject, :label => t('Subject'), :placeholder => '一句话说明' %>
+  <%= f.input :lead_info, :label => t('Lead Info'), :input_html => {:rows => 6} %>
+  <%= f.input :contact_instruction, :label => t('Contact Instruction'), :hint => '联系人及电话等联系方式', :input_html => { :rows => 4} %>  
+  <%= f.input :lead_source_id, :label => t('Lead Source'), :collection => lead_sources(), :include_blank => true %>     
+  <%= f.input :lead_status_id, :label => t('Lead Status'), :collection => lead_status(), :include_blank => true %>    
   <%= f.input :lead_eval, :label => t('Lead Eval:'), :input_html => { :rows => 4} %> 
-  <%= f.input :lead_accuracy_scale, :label => t('Accuracy Scale:'), :collection => 1..10, :include_blank => true %>
-  <%= f.input :lead_quality_scale, :label => t('Quality Scale:'), :collection => 1..10, :include_blank => true %>
+  <%= f.input :lead_accuracy_scale, :label => t('Accuracy Scale'), :collection => 1..10, :include_blank => true %>
+  <%= f.input :lead_quality_scale, :label => t('Quality Scale'), :collection => 1..10, :include_blank => true %>
   <%= f.input :provider_name_autocomplete, :input_html => { data: {autocomplete_source: SUBURI + authentify.autocomplete_users_path}}, :placeholder => "输入关键字", 
-                                           :label => "线索人：", :required => true %>   
+                                           :label => t('Lead Provider'), :required => true %>   
   
   <%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0", :class => BUTTONS_CLS['action'] %>
   <%= f.button :submit, t('Save'), :class => BUTTONS_CLS['action'] %>  
