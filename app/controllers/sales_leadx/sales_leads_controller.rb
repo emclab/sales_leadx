@@ -22,6 +22,7 @@ module SalesLeadx
   
     def create
       @sales_lead = SalesLeadx::SalesLead.new(params[:sales_lead], :as => :role_new)
+      @customer = SalesLeadx.customer_class.find_by_id(params[:sales_lead][:customer_id]) if params[:sales_lead].present? && params[:sales_lead][:customer_id].present?
       unless @customer
         cust = SalesLeadx.customer_class.find_by_name(@sales_lead.customer_name_autocomplete) if @sales_lead.customer_name_autocomplete.present?
         @sales_lead.customer_id = cust.id if cust.present?
