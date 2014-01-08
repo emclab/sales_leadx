@@ -5,7 +5,7 @@
 <%= simple_form_for @sales_lead do |f| %>    
  
   <%= f.input :lead_date, :label => t("Date"), :as => :string%>
-  <%= f.input :customer_name_autocomplete, :input_html => { data: {autocomplete_source: SUBURI + kustomerx.autocomplete_customers_path}}, :placeholder => "输入关键字", 
+  <%= f.input :customer_name_autocomplete, :input_html => { data: {autocomplete_source: SUBURI + eval(SalesLeadx.customer_autocomplete_path)}}, :placeholder => "输入关键字", 
                                            :label => "客户 ：", :required => true %>  
   <%= f.input :subject, :label => t('Subject'), :placeholder => '一句话说明' %>
   <%= f.input :lead_info, :label => t('Lead Info'), :input_html => {:rows => 6} %>
