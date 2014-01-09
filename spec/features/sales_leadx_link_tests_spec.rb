@@ -95,7 +95,7 @@ describe "LinkTests" do
       #visit customer_sales_leads_path(@cust)
       #click_link 'Back'
       visit sales_leads_path
-      click_link '输入Leads'
+      click_link 'New Sales Leads'
     end
     
     it "should display index for sales lead without customer" do
@@ -123,7 +123,7 @@ describe "LinkTests" do
       #save_and_open_page
       click_link @slead.id.to_s 
       #save_and_open_page     
-      click_link '新Log'
+      click_link 'New Log'
       #save_and_open_page
       page.should have_content('Log')
     end

@@ -47,9 +47,9 @@
     	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0", :class => BUTTONS_CLS['action'] %>
                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<%= link_to '输入Leads', SUBURI + "/authentify/view_handler?index=1&url=#{CGI::escape(new_sales_lead_path)}", :class => BUTTONS_CLS['action'] if @customer.blank? && has_action_right?('create', params[:controller]) %>  
+		<%= link_to 'New Sales Leads', SUBURI + "/authentify/view_handler?index=1&url=#{CGI::escape(new_sales_lead_path)}", :class => BUTTONS_CLS['action'] if @customer.blank? && has_action_right?('create', params[:controller]) %>  
               &nbsp;&nbsp;&nbsp;
-              <%= link_to '输入Leads', SUBURI + "/authentify/view_handler?index=1&url=#{CGI::escape(new_sales_lead_path(:customer_id => @customer.id, :parent_record_id => @customer, :parent_resource => SalesLeadx.customer_class.to_s.underscore.pluralize))}", :class => BUTTONS_CLS['action'] if @customer.present? && has_action_right?('create', params[:controller]) %>
+              <%= link_to 'New Sales Leads', SUBURI + "/authentify/view_handler?index=1&url=#{CGI::escape(new_sales_lead_path(:customer_id => @customer.id, :parent_record_id => @customer, :parent_resource => SalesLeadx.customer_class.to_s.underscore.pluralize))}", :class => BUTTONS_CLS['action'] if @customer.present? && has_action_right?('create', params[:controller]) %>
   </th>
   </tr>
 </table>

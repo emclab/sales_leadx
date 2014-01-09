@@ -7,58 +7,58 @@
 <h4><%=t('Sales Lead Info') %></h4>
 
 <p>
-  <b><%=t('Customer:') %></b>
+  <b><%=t('Customer') %>:</b>
   <%= @customer.name %>
 </p>
 <p>
-  <b><%=t('Zone:') %></b>
+  <b><%=t('Zone') %>:</b>
   <%= @customer.zone.zone_name %>
 </p>
 <p>
-  <b><%=t('Subject:') %></b>
+  <b><%=t('Subject') %>:</b>
   <%= @sales_lead.subject %>
 </p>
 <p>
-  <b><%=t('Enter Date:') %></b>
+  <b><%=t('Enter Date') %>:</b>
   <%= (@sales_lead.created_at + 8.hours).strftime("%Y/%m/%d") %>
 </p>
 <p>
-  <b><%=t('Lead Provider:') %></b>
+  <b><%=t('Lead Provider') %>:</b>
   <%= @sales_lead.provider.name %>
 </p>
 <p>
-  <b><%=t('Lead Info:') %></b>
+  <b><%=t('Lead Info') %></b>
   <%= @sales_lead.lead_info %>
 </p>
 <p>
-  <b><%=t('Contact Instruction:') %></b>
+  <b><%=t('Contact Instruction') %>:</b>
   <%= @sales_lead.contact_instruction %>
 </p>
 <p>
-  <b><%=t('Lead Quality(1..10):') %></b>
+  <b><%=t('Lead Quality(1..10)') %>:</b>
   <%= @sales_lead.lead_quality_scale %>
 </p>
 <p>
-  <b><%=t('Lead Accuracy(1..10):') %></b>
+  <b><%=t('Lead Accuracy(1..10)') %>:</b>
   <%= @sales_lead.lead_accuracy_scale %>
 </p>
 
 <p>
-  <b><%=t('Sale Success:') %></b>
+  <b><%=t('Sale Success') %>:</b>
   <%= @sales_lead.sale_success %>
 </p>
 <% if @sales_lead.sale_success %>
 <p>
-  <b>成单金额￥:</b>
+  <b><%=t('Init. Order Amount($)') %>:</b>
   <%= number_with_delimiter(@sales_lead.initial_order_total) %>
 </p>
 <% end %>
 <p>
-  <b><%=t('Lead Status:') %></b>
+  <b><%=t('Lead Status') %>:</b>
   <%= @sales_lead.lead_status.name %>
 </p>
 <p>
-  <b><%=t('Lead Source:') %></b>
+  <b><%=t('Lead Source') %>:</b>
   <%= @sales_lead.lead_source.name %>
 </p>
 <p>
@@ -66,7 +66,7 @@
   <%= @sales_lead.last_updated_by.name %>
 </p>
 <p>
-  <b><%=t('Lead Logs:') %></b>
+  <b><%=t('Lead Logs') %>:</b>
   <ul>
 <% Commonx::Log.where('resource_id = ? AND resource_name = ?', @sales_lead.id, params[:controller].sub('/', '_')).order("id DESC").each do |f| %>
   <li>
@@ -80,7 +80,7 @@
   <tr>
     <th>
     	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<%= link_to '新Log', SUBURI + commonx.new_log_path(:resource_id => @sales_lead.id, :resource_name => params[:controller], :subaction => 'sales_lead', :format => :js), 
+		<%= link_to 'New Log', SUBURI + commonx.new_log_path(:resource_id => @sales_lead.id, :resource_name => params[:controller], :subaction => 'sales_lead', :format => :js), 
                               :remote => true, :id => 'new_log_link', :class => BUTTONS_CLS['action'] if has_action_right?('create_sales_lead', 'commonx_logs') %>    </th>
   </tr>
 </table>
