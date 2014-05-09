@@ -18,6 +18,7 @@ module SalesLeadx
     def new
       @title= "新销售线索"
       @sales_lead = SalesLeadx::SalesLead.new()
+      @erb_code = find_config_const('sales_lead_new_view', 'sales_leadx')
     end
   
     def create
@@ -34,6 +35,7 @@ module SalesLeadx
       if @sales_lead.save
         redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Saved!")
       else
+        @erb_code = find_config_const('sales_lead_new_view', 'sales_leadx')
         flash.now[:error] = t('Data Error. Not Saved!')
         render 'new'
       end
@@ -43,6 +45,7 @@ module SalesLeadx
     def edit
       @title= "更新销售线索"      
       @sales_lead = SalesLeadx::SalesLead.find_by_id(params[:id])
+      @erb_code = find_config_const('sales_lead_edit_view', 'sales_leadx')
     end
   
     def update
@@ -55,6 +58,7 @@ module SalesLeadx
       if @sales_lead.update_attributes(params[:sales_lead], :as => :role_update)
         redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Updated!")
       else
+        @erb_code = find_config_const('sales_lead_edit_view', 'sales_leadx')
         flash.now[:error] = t('Data Error. Not Updated!')
         render 'edit'
       end
