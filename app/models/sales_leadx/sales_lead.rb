@@ -24,9 +24,12 @@ module SalesLeadx
     belongs_to :customer, :class_name => SalesLeadx.customer_class.to_s
     belongs_to :lead_source, :class_name => 'Commonx::MiscDefinition'
     belongs_to :lead_status, :class_name => 'Commonx::MiscDefinition'
+    belongs_to :lead_category, :class_name => 'Commonx::MiscDefinition'
     
     validates :lead_info, :subject, :lead_date, :presence => true
-    validates :customer_id, :provider_id, :lead_source_id, :lead_status_id, :presence => true, :numericality => {:greater_than => 0}
+    validates :customer_id, :provider_id, :lead_source_id, :presence => true, :numericality => {:greater_than => 0}
+    validates :lead_status_id, :numericality => {:greater_than => 0}, :if => 'lead_status_id.present?'
+    validates :lead_category_id, :numericality => {:greater_than => 0}, :if => 'lead_category_id.present?'
     validates :lead_info, :uniqueness => {:scope => :customer_id, :case_sensitive => false, :message => I18n.t('Duplicate Lead Info!')}
     
     def customer_name_autocomplete

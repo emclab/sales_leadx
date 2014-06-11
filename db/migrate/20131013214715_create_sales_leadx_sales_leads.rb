@@ -17,6 +17,7 @@ class CreateSalesLeadxSalesLeads < ActiveRecord::Migration
       t.string :subject
       t.date :lead_date
       t.integer :initial_order_total
+      t.integer :lead_category_id
 
       t.timestamps
     end
@@ -25,5 +26,7 @@ class CreateSalesLeadxSalesLeads < ActiveRecord::Migration
     add_index :sales_leadx_sales_leads, :provider_id
     add_index :sales_leadx_sales_leads, :subject
     add_index :sales_leadx_sales_leads, :lead_date
+    add_index :sales_leadx_sales_leads, :lead_category_id
+    add_index :sales_leadx_sales_leads, :lead_status_id
   end
 end

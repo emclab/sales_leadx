@@ -42,6 +42,21 @@ module SalesLeadx
       i.should_not be_valid
     end
     
+    it "should take nil lead_status_id" do
+      i = FactoryGirl.build(:sales_leadx_sales_lead, lead_status_id: nil)
+      i.should be_valid
+    end
+    
+    it "should reject 0 lead_category_id" do
+      i = FactoryGirl.build(:sales_leadx_sales_lead, lead_category_id: 0)
+      i.should_not be_valid
+    end
+    
+    it "should take nil lead_category_id" do
+      i = FactoryGirl.build(:sales_leadx_sales_lead, lead_category_id: nil)
+      i.should be_valid
+    end
+    
     it "should reject duplicate lead_info for the same customer_id" do
       i1 = FactoryGirl.create(:sales_leadx_sales_lead, lead_info: 'this is a lead info')
       i2 = FactoryGirl.build(:sales_leadx_sales_lead, lead_info: 'This Is A lEad INfo' )
